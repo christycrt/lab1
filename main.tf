@@ -21,6 +21,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/24"]
   location            = var.location
   resource_group_name = var.resource_group_name
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -28,6 +31,9 @@ resource "azurerm_subnet" "example" {
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.example.name
   address_prefixes     = ["10.0.2.0/24"]
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "azurerm_public_ip" "example" {
@@ -35,6 +41,9 @@ resource "azurerm_public_ip" "example" {
   resource_group_name = var.resource_group_name
   location            = var.location
   allocation_method   = "Static"
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "azurerm_network_security_group" "example" {
@@ -54,8 +63,8 @@ resource "azurerm_network_security_group" "example" {
         destination_address_prefix = "*"
     }
 
-    tags = {
-        environment = "Terraform Demo"
+    lifecycle {
+      create_before_destroy = true
     }
 }
 
@@ -69,11 +78,17 @@ resource "azurerm_network_interface" "example" {
     subnet_id                     = azurerm_subnet.example.id
     private_ip_address_allocation = "Dynamic"
   }
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "azurerm_network_interface_security_group_association" "example" {
     network_interface_id      = azurerm_network_interface.example.id
     network_security_group_id = azurerm_network_security_group.example.id
+    lifecycle {
+      create_before_destroy = true
+    }
 }
 
 resource "azurerm_linux_virtual_machine" "example" {
@@ -98,5 +113,9 @@ resource "azurerm_linux_virtual_machine" "example" {
     offer     = "UbuntuServer"
     sku       = "16.04-LTS"
     version   = "latest"
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }
