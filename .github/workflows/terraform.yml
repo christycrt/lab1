@@ -43,7 +43,7 @@ jobs:
     
     - name: Terraform Apply
       run: terraform apply tfdestroy
-      if: succeeded() || failed()
+      if: always()
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -out tfplan
