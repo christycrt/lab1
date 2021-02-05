@@ -1,0 +1,13 @@
+[Unit]
+Description=hello
+After=network.target
+
+[Service]
+Type=simple
+DinamicUser=yes
+ExecStrat=/home/azureuser/lab1/lab1
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

@@ -92,7 +92,27 @@ resource "azurerm_linux_virtual_machine" "example" {
   source_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
-    sku       = "16.04-LTS"
+    sku       = "20.04-LTS"
     version   = "latest"
+  }
+
+  connection {
+    host = self.public_ip
+    user = self.admin_username
+    password = self.admin_password
+  }
+
+  provisioner "remote-exec" {
+   inline = [
+       "sudo apt-get update",
+       "sudo apt install go -y",
+       "sudo apt install git -y",
+       "git clone https://github.com/christycrt/lab1",
+       "cd lab1",
+       "go build .",
+       "sudo mv lab1.service /etc/systemd/system/",
+       "sudo systemctl enable lab1.service",
+       "sudo systemctl start lab1.service"
+   ]
   }
 }
