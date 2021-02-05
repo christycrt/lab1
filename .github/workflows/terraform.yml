@@ -38,13 +38,13 @@ jobs:
 #       run: terraform refresh
     - name: Terraform Taint
       run: |
-        terraform taint azurerm_linux_virtual_machine.example -auto-approve
-        terraform taint azurerm_network_interface_security_group_association.example -auto-approve
-        terraform taint azurerm_network_interface.example -auto-approve
-        terraform taint azurerm_network_security_group.example -auto-approve
-        terraform taint azurerm_public_ip.example -auto-approve
-        terraform taint azurerm_subnet.example -auto-approve
-        terraform taint azurerm_virtual_network.example -auto-approve
+        terraform taint azurerm_linux_virtual_machine.example
+        terraform taint azurerm_network_interface_security_group_association.example
+        terraform taint azurerm_network_interface.example
+        terraform taint azurerm_network_security_group.example
+        terraform taint azurerm_public_ip.example
+        terraform taint azurerm_subnet.example
+        terraform taint azurerm_virtual_network.example
       
     # Generates an execution plan for Terraform
 #     - name: Terraform Plan
