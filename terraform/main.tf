@@ -8,7 +8,7 @@ terraform {
 }
 
 backend "remote" {
-    organization = "<ORG_NAME>"
+    organization = "crtcompany"
     workspaces {
         name = "Example-Workspace"
     }
