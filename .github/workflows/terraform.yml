@@ -34,10 +34,10 @@ jobs:
 #     # Checks that all Terraform configuration files adhere to a canonical format
 #     - name: Terraform Format
 #       run: terraform fmt -check
-    - name: Terraform Refresh
-      run: terraform refresh
-    - name: Terraform plan Destroy
-      run: terraform plan -destroy -target=azurerm_linux_virtual_machine.example
+#     - name: Terraform Refresh
+#       run: terraform refresh
+    - name: Terraform Destroy
+      run: terraform destroy -target azurerm_linux_virtual_machine.example
     
       
     # Generates an execution plan for Terraform
