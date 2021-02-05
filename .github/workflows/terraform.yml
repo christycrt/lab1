@@ -32,7 +32,6 @@ jobs:
       
     - name: Azure delete resource
       run: |
-        az network vnet delete -g INT493 -n INT493-network
         az network vnet subnet delete -g INT493 -n internal
         az network public-ip delete -g INT493 -n acceptanceTestPublicIp1
         az network nsg delete -g INT493 -n myNetworkSecurityGroup
