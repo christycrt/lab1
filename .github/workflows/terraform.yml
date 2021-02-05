@@ -32,11 +32,17 @@ jobs:
       run: terraform init
 
 #     # Checks that all Terraform configuration files adhere to a canonical format
-#     - name: Terraform Format
-#       run: terraform fmt -check
-    - name: Terraform destroy
-      run: terraform plan -destroy
-      
+    - name: Terraform Format
+      run: terraform fmt -check
+    - name: Terraform Destroy
+      run: |
+        terraform destroy -target azurerm_virtual_network.example -no-color -auto-approve
+        terraform destroy -target azurerm_subnet.example -no-color -auto-approve
+        terraform destroy -target azurerm_network_security_group.example -no-color -auto-approve
+        terraform destroy -azurerm_network_interface.example -no-color -auto-approve
+        terraform destroy -azurerm_network_interface_security_group_association.example -no-color -auto-approve
+        terraform destroy -azurerm_linux_virtual_machine.example -no-color -auto-approve
+
     # Generates an execution plan for Terraform
 #     - name: Terraform Plan
 #       run: terraform plan
