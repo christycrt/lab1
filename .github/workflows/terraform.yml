@@ -36,15 +36,6 @@ jobs:
 #       run: terraform fmt -check
 #     - name: Terraform Refresh
 #       run: terraform refresh
-    - name: Terraform Taint
-      run: |
-        terraform taint azurerm_linux_virtual_machine.example
-        terraform taint azurerm_network_interface_security_group_association.example
-        terraform taint azurerm_network_interface.example
-        terraform taint azurerm_network_security_group.example
-        terraform taint azurerm_public_ip.example
-        terraform taint azurerm_subnet.example
-        terraform taint azurerm_virtual_network.example
       
     # Generates an execution plan for Terraform
 #     - name: Terraform Plan
@@ -55,3 +46,13 @@ jobs:
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply -auto-approve
+      
+    - name: Terraform Taint
+      run: |
+        terraform taint azurerm_linux_virtual_machine.example
+        terraform taint azurerm_network_interface_security_group_association.example
+        terraform taint azurerm_network_interface.example
+        terraform taint azurerm_network_security_group.example
+        terraform taint azurerm_public_ip.example
+        terraform taint azurerm_subnet.example
+        terraform taint azurerm_virtual_network.example
