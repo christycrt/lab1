@@ -36,9 +36,15 @@ jobs:
 #       run: terraform fmt -check
 #     - name: Terraform Refresh
 #       run: terraform refresh
-    - name: Terraform Destroy
-      run: terraform destroy -target azurerm_linux_virtual_machine.example -auto-approve
-    
+    - name: Terraform Taint
+      run: |
+        terraform taint azurerm_linux_virtual_machine.example -auto-approve
+        terraform taint azurerm_network_interface_security_group_association.example -auto-approve
+        terraform taint azurerm_network_interface.example -auto-approve
+        terraform taint azurerm_network_security_group.example -auto-approve
+        terraform taint azurerm_public_ip.example -auto-approve
+        terraform taint azurerm_subnet.example -auto-approve
+        terraform taint azurerm_virtual_network.example -auto-approve
       
     # Generates an execution plan for Terraform
 #     - name: Terraform Plan
