@@ -32,7 +32,7 @@ resource "azurerm_subnet" "example" {
 
 resource "azurerm_network_security_group" "example" {
     name                = "myNetworkSecurityGroup"
-    location            = "eastus"
+    location            = var.location
     resource_group_name = var.resource_group_name
 
     security_rule {
