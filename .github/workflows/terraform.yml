@@ -36,6 +36,9 @@ jobs:
 #       run: terraform fmt -check
 #     - name: Terraform plan Destroy
 #       run: terraform plan -destroy -target=azurerm_linux_virtual_machine.example
+    
+    - name: Terraform Refresh
+      run: terraform refresh
       
     # Generates an execution plan for Terraform
     - name: Terraform Plan
