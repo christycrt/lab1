@@ -36,6 +36,17 @@ jobs:
 #       run: terraform fmt -check
 #     - name: Terraform plan Destroy
 #       run: terraform plan -destroy
+    - name: Azure Login
+      run: az login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
+      
+    - name: Azure delete resource
+      run: |
+        az network nic delete -g INT493 -n INT493-nic
+        az vm delete -g INT493 -n INT493-machine --yes
+        az network vnet delete -g INT493 -n INT493-network
+        az network vnet subnet delete -g INT493 -n internal
+        az network public-ip delete -g INT493 -n acceptanceTestPublicIp1
+        az network nsg delete -g INT493 -n myNetworkSecurityGroup
       
     # Generates an execution plan for Terraform
     - name: Terraform Plan
