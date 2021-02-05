@@ -27,6 +27,12 @@ jobs:
       with:
         cli_config_credentials_token: gulfHz1ooGHTRQ.atlasv1.a90f7YlgbcvCAAJlkfwZMtpofTYLHytgkEMzjX4wAVzHJIXKXKQMAzcTBKZs55wP75w
 
+    - name: Azure Login
+      run: az login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
+      
+    - name: Azure delete resource
+      run: az vm delete -g INT493 -n INT493-machine --yes
+    
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
@@ -36,17 +42,6 @@ jobs:
 #       run: terraform fmt -check
 #     - name: Terraform plan Destroy
 #       run: terraform plan -destroy
-    - name: Azure Login
-      run: az login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
-      
-    - name: Azure delete resource
-      run: |
-        az network nic delete -g INT493 -n INT493-nic
-        az vm delete -g INT493 -n INT493-machine --yes
-        az network vnet delete -g INT493 -n INT493-network
-        az network vnet subnet delete -g INT493 -n internal
-        az network public-ip delete -g INT493 -n acceptanceTestPublicIp1
-        az network nsg delete -g INT493 -n myNetworkSecurityGroup
       
     # Generates an execution plan for Terraform
     - name: Terraform Plan
