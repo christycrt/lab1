@@ -3,11 +3,10 @@ variable "CLIENT_SECRET" {
   default = "qXCnjYwIaWq9dYOrhJED2fCtfL~c34x7vh"
 }
 
-variable "resource" {
-    type = "map"
+variable "resource_group_name" {
+    default = "INT493"
+}
 
-    default = {
-        resource_group_name = "INT493"
-        location = "southeastasia"
-    }
+variable "location" {
+    default = "southeastasia"
 }
