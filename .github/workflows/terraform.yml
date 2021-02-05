@@ -65,7 +65,7 @@ jobs:
         git config --local user.name "christycrt"
         git add tfdestroy
         git commit -m "Add changes tfdestroy" -a
-        git pull
+        git pull origin main
       shell: bash
       if: always()
       
