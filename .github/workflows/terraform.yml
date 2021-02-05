@@ -41,36 +41,36 @@ jobs:
     - name: Terraform Init
       run: terraform init
 
-    - name: Terraform Apply
-      run: terraform apply tfdestroy
+#     - name: Terraform Apply
+#       run: terraform apply tfdestroy
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -out tfplan
-      if: always()
+#       if: always()
       # On push to main, build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
       run: terraform apply tfplan
-      if: always()
+#       if: always()
       
-    - name: Terraform Plan Destroy
-      run: terraform plan -destroy -out tfdestroy
-      if: always()
+#     - name: Terraform Plan Destroy
+#       run: terraform plan -destroy -out tfdestroy
+#       if: always()
     
-    - name: Commit files
-      id: commit
-      run: |
-        git config --local user.email "christycrt@gmail.com"
-        git config --local user.name "christycrt"
-        git add tfdestroy
-        git commit -m "Add changes tfdestroy" -a
-        git pull origin main
-      shell: bash
-      if: always()
+#     - name: Commit files
+#       id: commit
+#       run: |
+#         git config --local user.email "christycrt@gmail.com"
+#         git config --local user.name "christycrt"
+#         git add tfdestroy
+#         git commit -m "Add changes tfdestroy" -a
+#         git pull origin main
+#       shell: bash
+#       if: always()
       
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-         github_token: ${{ secrets.G_TOKEN }}
-      if: always()
+#     - name: Push changes
+#       uses: ad-m/github-push-action@master
+#       with:
+#          github_token: ${{ secrets.G_TOKEN }}
+#       if: always()
