@@ -75,7 +75,7 @@ jobs:
       run: terraform apply -auto-approve
       
     - name: Terraform plan Destroy
-      run: terraform destroy
+      run: terraform destroy -auto-approve
 #     - name: Terraform Taint
 #       run: |
 #         terraform taint azurerm_linux_virtual_machine.example
