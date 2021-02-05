@@ -32,7 +32,6 @@ jobs:
       
     - name: Azure delete resource
       run: |
-        az vm delete -g INT493 -n INT493-machine --yes
         az disk delete --name INT493-machine --resource-group INT493
         az network nic delete -g INT493 -n INT493-nic
         az network nsg delete -g INT493 -n myNetworkSecurityGroup
