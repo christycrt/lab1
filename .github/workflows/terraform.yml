@@ -63,7 +63,12 @@ jobs:
       run: terraform plan -out tfplan
     
     - name: Terraform Destroy
-      run: terraform destroy "tfplan" -no-color -auto-approve
+      run: |
+        terraform destroy -target azurerm_network_interface.example -no-color -auto-approve
+        terraform destroy -target azurerm_network_security_group.example -no-color -auto-approve
+        terraform destroy -target azurerm_virtual_machine.example -no-color -auto-approve
+        terraform destroy -target azurerm_public_ip.example -no-color -auto-approve
+        terraform destroy -target azurerm_virtual_network.example -no-color -auto-approve
 
       # On push to main, build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
