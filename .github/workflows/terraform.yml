@@ -40,35 +40,11 @@ jobs:
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
-
-#     # Checks that all Terraform configuration files adhere to a canonical format
-#     - name: Terraform Format
-#       run: terraform fmt -check
-#     - name: Terraform plan Destroy
-#       run: terraform plan -destroy -out tfplandestroy
-#     - name: Terraform Apply
-#       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-#       run: terraform apply "tfplandestroy"
-#     - name: Terraform Destroy
-#       run:  |
-#         terraform destroy -target azurerm_network_interface.example tfplan -no-color -auto-approve
-#         terraform destroy -target azurerm_network_security_group.example tfplan -no-color -auto-approve
-#         terraform destroy -target azurerm_virtual_machine.example tfplan -no-color -auto-approve
-#         terraform destroy -target azurerm_public_ip.example tfplan -no-color -auto-approve
-#         terraform destroy -target azurerm_virtual_network.example tfplan -no-color -auto-approve
-
-#     - name: Terraform Apply
-#       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-#       run: terraform apply "tfplan"
-    - name: Terraform Apply
-      run: terraform apply tfdestroy
+      
     # Generates an execution plan for Terraform
-      if: always()
+      if: failed()
     - name: Terraform Plan
       run: terraform plan -out tfplan
-    
-#     - name: Terraform Destroy
-#       run: terraform destroy tfplan -auto-approve
 
       # On push to main, build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
@@ -78,14 +54,6 @@ jobs:
     
     - name: Terraform Plan Destroy
       run: terraform plan -destroy -out tfdestroy
-#     - name: Terraform plan Destroy
-#       run: terraform destroy tfplan
-#     - name: Terraform Taint
-#       run: |
-#         terraform taint azurerm_linux_virtual_machine.example
-#         terraform taint azurerm_network_interface_security_group_association.example
-#         terraform taint azurerm_network_interface.example
-#         terraform taint azurerm_network_security_group.example
-#         terraform taint azurerm_public_ip.example
-#         terraform taint azurerm_subnet.example
-#         terraform taint azurerm_virtual_network.example
+
+    - name: Terraform Apply
+      run: terraform apply tfdestroy
