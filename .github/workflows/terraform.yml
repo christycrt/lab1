@@ -15,7 +15,7 @@ jobs:
     defaults:
       run:
         shell: bash
-
+    if: "!contains(github.event.head_commit.message, 'Add changes tfdestroy')"
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
@@ -58,3 +58,19 @@ jobs:
       run: terraform plan -destroy -out tfdestroy
       if: always()
     
+    - name: Commit files
+      id: commit
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "github-actions"
+        git add tfdestroy
+        git commit -m "Add changes tfdestroy" -a
+        git pull
+      shell: bash
+      if: always()
+      
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+         github_token: ${{ secrets.GITHUB_TOKEN }}
+      if: always()
