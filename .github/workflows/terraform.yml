@@ -47,12 +47,8 @@ jobs:
 #     - name: Terraform plan Destroy
 #       run: terraform plan -destroy
     - name: Terraform Destroy
-      run: |
-        terraform destroy -target azurerm_network_interface.example -out tfplan -no-color -auto-approve
-        terraform destroy -target azurerm_network_security_group.example -out tfplan -no-color -auto-approve
-        terraform destroy -target azurerm_virtual_machine.example -out tfplan -no-color -auto-approve
-        terraform destroy -target azurerm_public_ip.example -out tfplan -no-color -auto-approve
-        terraform destroy -target azurerm_virtual_network.example -out tfplan -no-color -auto-approve
+      run: terraform plan -destroy -out tfplan
+
         
     # Generates an execution plan for Terraform
     - name: Terraform Plan
