@@ -31,7 +31,14 @@ jobs:
       run: az login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
       
     - name: Azure delete resource
-      run: az vm delete -g INT493 -n INT493-machine --yes
+      run: |
+        az vm delete -g INT493 -n INT493-machine --yes
+        az disk delete --name INT493-machine --resource-group INT493
+        az network nic delete -g INT493 -n INT493-nic
+        az network nsg delete -g INT493 -n myNetworkSecurityGroup
+        az network public-ip delete -g INT493 -n acceptanceTestPublicIp1
+        az network vnet subnet delete -g INT493 -n internal
+        az network vnet delete -g INT493 -n INT493-network
     
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
