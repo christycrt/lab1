@@ -7,13 +7,6 @@ terraform {
   }
 }
 
-backend "remote" {
-    organization = "crtcompany"
-    workspaces {
-        name = "Example-Workspace"
-    }
-}
-
 provider "azurerm" {
   features {}
 }
