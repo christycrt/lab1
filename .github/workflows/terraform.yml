@@ -47,11 +47,16 @@ jobs:
 #     - name: Terraform plan Destroy
 #       run: terraform plan -destroy
     - name: Terraform Destroy
-      run: terraform plan -destroy -out tfplan
+      run:  |
+        terraform destroy -target azurerm_network_interface.example tfplan -no-color -auto-approve
+        terraform destroy -target azurerm_network_security_group.example tfplan -no-color -auto-approve
+        terraform destroy -target azurerm_virtual_machine.example tfplan -no-color -auto-approve
+        terraform destroy -target azurerm_public_ip.example tfplan -no-color -auto-approve
+        terraform destroy -target azurerm_virtual_network.example tfplan -no-color -auto-approve
 
-    - name: Terraform Apply
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: terraform apply "tfplan"
+#     - name: Terraform Apply
+#       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+#       run: terraform apply "tfplan"
       
     # Generates an execution plan for Terraform
     - name: Terraform Plan
