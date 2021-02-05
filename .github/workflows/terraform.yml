@@ -44,7 +44,10 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -out tfplan
-        
+    
+    - name: Terraform Apply
+      run: terraform apply tfplan
+      if: always()
     - name: Terraform Plan Destroy
       run: terraform plan -destroy -out tfdestroy
     
