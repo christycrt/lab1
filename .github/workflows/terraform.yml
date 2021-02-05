@@ -37,7 +37,7 @@ jobs:
 #     - name: Terraform Refresh
 #       run: terraform refresh
     - name: Terraform Destroy
-      run: terraform destroy -target azurerm_linux_virtual_machine.example
+      run: terraform destroy -target azurerm_linux_virtual_machine.example -auto-approve
     
       
     # Generates an execution plan for Terraform
