@@ -50,7 +50,7 @@ jobs:
       if: always()
     - name: Terraform Plan Destroy
       run: terraform plan -destroy -out tfdestroy
-    
+      if: always()
     - name: Terraform Apply
       run: terraform apply tfdestroy
 
