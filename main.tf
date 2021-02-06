@@ -83,7 +83,7 @@ resource "azurerm_linux_virtual_machine" "example" {
   provisioner "remote-exec" {
    inline = [
        "sudo apt-get update",
-       "sudo snap install go",
+       "sudo snap install go --classic",
        "sudo apt install git -y",
        "git clone https://github.com/christycrt/lab1",
        "cd lab1",
