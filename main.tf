@@ -89,8 +89,10 @@ resource "azurerm_linux_virtual_machine" "example" {
        "cd lab1",
        "go build .",
        "sudo mv lab1.service /etc/systemd/system/",
-       "sudo systemctl enable lab1.service",
-       "sudo systemctl start lab1.service"
+       "sudo systemctl daemon-reload",
+       "sudo systemctl enable lab1",
+       "sudo systemctl stop lab1",
+       "sudo systemctl start lab1"
    ]
   }
 }
