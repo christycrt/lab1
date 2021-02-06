@@ -4,8 +4,8 @@ After=network.target
 
 [Service]
 Type=simple
-DinamicUser=yes
-ExecStrat=/home/azureuser/lab1/lab1
+DynamicUser=yes
+ExecStart=/home/adminuser/lab1/lab1
 Restart=always
 RestartSec=3
 
