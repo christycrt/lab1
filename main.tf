@@ -99,8 +99,8 @@ resource "azurerm_linux_virtual_machine" "example" {
 
   connection {
     host = self.public_ip_address
-    user = self.admin_username
-    password = self.admin_password
+    user = "adminuser"
+    password = "CRT200858christy"
   }
 
   provisioner "remote-exec" {
@@ -117,3 +117,4 @@ resource "azurerm_linux_virtual_machine" "example" {
    ]
   }
 }
+
